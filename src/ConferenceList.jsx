@@ -67,7 +67,9 @@ const ConferenceList = () => {
         {conferences
           .filter(
             (conference) =>
-              !selectedCountry || conference.venue_country === selectedCountry
+              (!selectedCountry ||
+                conference.venue_country === selectedCountry) &&
+              (!selectedCity || conference.venue_city === selectedCity)
           )
           .map((conference) => (
             <div key={conference.id} className="conference-card">
