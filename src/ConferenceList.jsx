@@ -2,26 +2,37 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ConferenceList.css";
 
+var total = 0;
 const ConferenceList = () => {
   const [conferences, setConferences] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [uniqueCountries, setUniqueCountries] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [uniqueCities, setUniqueCities] = useState([]);
-
   useEffect(() => {
     axios
       .get("https://gdscdev.vercel.app/api")
       .then((response) => {
-        setConferences(response.data.content.data);
-        const countries = Array.from(
-          new Set(response.data.content.data.map((conf) => conf.venue_country))
-        );
-        setUniqueCountries(countries);
-        const cities = Array.from(
-          new Set(response.data.content.data.map((conf) => conf.venue_city))
-        );
-        setUniqueCities(cities);
+        if (response.data.status) {
+          total = response.data.content.meta.total;
+          setConferences(response.data.content.data);
+          const countries = Array.from(
+            new Set(
+              response.data.content.data.map((conf) => conf.venue_country)
+            )
+          );
+          setUniqueCountries(countries);
+          const cities = Array.from(
+            new Set(response.data.content.data.map((conf) => conf.venue_city))
+          );
+          setUniqueCities(cities);
+        } else {
+          return (
+            <div>
+              <h1>NO DATA FOUND</h1>
+            </div>
+          );
+        }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -32,6 +43,7 @@ const ConferenceList = () => {
     <div className="conference-list">
       <div className="header">
         <h1>Tech Conferences</h1>
+        <h2>Total:{total}</h2>
         <div className="filter">
           <label htmlFor="countryFilter">Filter by Country: </label>
           <select
