@@ -73,7 +73,10 @@ const ConferenceList = () => {
           )
           .map((conference) => (
             <div key={conference.id} className="conference-card">
-              <img src={conference.banner_image} alt={conference.title} />
+              <div className="img">
+                <img src={conference.banner_image} alt={conference.title} />
+                <img src={conference.organiser_icon} alt={conference.title} />
+              </div>
               <h2>{conference.title}</h2>
               <p>{conference.description}</p>
               <p>Date: {conference.date_time.split("T")[0]}</p>

@@ -1,20 +1,26 @@
+* {
+  overflow-x: hidden;
+}
 .conference-list {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
 }
-
+.img {
+  display: flex;
+}
 .conference-card {
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 5px;
   width: 300px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 4px;
 }
 
 .conference-card img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
 }
 .header {
@@ -26,12 +32,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 20px;
+  gap: 30px;
 }
 .filter {
   margin: auto;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 624px) {
   .header {
     display: flex;
     flex-direction: column;
